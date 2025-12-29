@@ -77,3 +77,21 @@ variable "prefix" {
   default     = "yugabyte-"
   type        = string
 }
+
+variable "image_project" {
+  description = "The GCP project containing the image"
+  default     = "centos-cloud"
+  type        = string
+}
+
+variable "image_family" {
+  description = "The image family to use for the instances"
+  default     = "centos-7"
+  type        = string
+}
+
+variable "gcp_project_id" {
+  description = "The GCP project ID where resources will be created"
+  type        = string
+  default     = null
+}

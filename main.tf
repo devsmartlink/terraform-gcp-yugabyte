@@ -1,7 +1,7 @@
 
 data "google_compute_image" "YugaByte_DB_Image" {
-  family  = "centos-7"
-  project = "centos-cloud"
+  family  = var.image_family
+  project = var.image_project
 }
 data "google_compute_zones" "available" {
     region = "${var.region_name}"
@@ -15,6 +15,7 @@ resource "google_compute_firewall" "YugaByte-Firewall" {
       ports = ["9000","7000","6379","9042","5433","22"]
   }
   target_tags = ["${var.prefix}${var.cluster_name}"]
+  source_ranges = ["0.0.0.0/0"]
 }
 resource "google_compute_firewall" "YugaByte-Intra-Firewall" {
   name = "${var.vpc_firewall}-${var.prefix}${var.cluster_name}-intra-firewall"
@@ -24,6 +25,7 @@ resource "google_compute_firewall" "YugaByte-Intra-Firewall" {
       ports = ["7100", "9100"]
   }
   target_tags = ["${var.prefix}${var.cluster_name}"]
+  source_ranges = ["0.0.0.0/0"]
 }
 
 resource "google_compute_instance" "yugabyte_node" {
