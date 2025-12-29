@@ -95,3 +95,9 @@ variable "gcp_project_id" {
   type        = string
   default     = null
 }
+
+variable "vpc_subnetwork" {
+  description = "VPC subnetwork to deploy YugaByte DB"
+  default     = null
+  type        = string
+}
