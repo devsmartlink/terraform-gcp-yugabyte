@@ -101,3 +101,8 @@ variable "vpc_subnetwork" {
   default     = null
   type        = string
 }
+
+variable "yb_build" {
+  description = "The YugabyteDB build number (e.g., '2025.2.0.0-b131')"
+  default     = ""
+}

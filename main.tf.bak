@@ -47,6 +47,7 @@ resource "google_compute_instance" "yugabyte_node" {
 
     network_interface{
         network = var.vpc_network
+        subnetwork = var.vpc_subnetwork
         access_config {
             // external ip to instance
         }
@@ -99,7 +100,7 @@ resource "google_compute_instance" "yugabyte_node" {
             "chmod +x /home/${var.ssh_user}/create_universe.sh",
             "chmod +x /home/${var.ssh_user}/start_tserver.sh",
             "chmod +x /home/${var.ssh_user}/start_master.sh",
-            "/home/${var.ssh_user}/install_software.sh '${var.yb_version}'"
+            "/home/${var.ssh_user}/install_software.sh '${var.yb_version}' '${var.yb_download_url}'"
         ]
         connection {
 	        host = self.network_interface.0.access_config.0.nat_ip
